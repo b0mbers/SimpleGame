@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Page Title</title>
+<title>Simple Game</title>
 </head>
 <body>
 <canvas id ="canvas" width = "400" height="400"/>
@@ -22,8 +22,8 @@ var highscore = 0
 setInterval(function(){
 ctx.canvas.width  = Math.floor(window.innerWidth/10)*10;
 ctx.canvas.height = Math.floor(window.innerHeight/10)*10;
-var width = canvas.style.width
-var height = canvas.style.height
+var width = Math.floor(window.innerWidth/10)*10;
+var height = Math.floor(window.innerWidth/10)*10;
 ctx.clearRect(0,0,width,height)
 time++
 if(pause == false){
