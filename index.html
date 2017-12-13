@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+<canvas id ="canvas" width = "400" height="400"/>
+<script>
+var canvas = document.getElementById("canvas")
+var ctx = canvas.getContext("2d")
+ctx.canvas.width  = Math.floor(window.innerWidth/10)*10;
+ctx.canvas.height = Math.floor(window.innerHeight/10)*10;
+var score = 0
+var dir = 0
+var time = 0
+var plrX = canvas.style.width-10
+var plrY = canvas.style.height-10
+var enmX = 0
+var enmY = 0
+var pause = false
+var highscore = 0
+setInterval(function(){
+ctx.canvas.width  = Math.floor(window.innerWidth/10)*10;
+ctx.canvas.height = Math.floor(window.innerHeight/10)*10;
+var width = canvas.style.width
+var height = canvas.style.height
+ctx.clearRect(0,0,width,height)
+time++
+if(pause == false){
+score++
+if(time % 10 == 0){
+	if(enmX<plrX){
+    	enmX+=10
+    }
+    if(enmX>plrX){
+    	enmX-=10
+    }
+    if(enmY<plrY){
+    	enmY+=10
+    }
+    if(enmY>plrY){
+    	enmY-=10
+    }
+}
+}
+if(time % 5 == 0){
+	if(dir == 1){
+    	plrY -=10
+    }
+    if(dir == 2){
+    	plrY +=10
+    }
+    if(dir == 3){
+    	plrX -=10
+    }
+    if(dir == 4){
+    	plrX +=10
+    }
+    
+}
+if(plrX == width){
+	plrX = 0
+}
+if(plrX == -10){
+plrX = width-10
+}
+if(plrY == height){
+	plrY = 0
+}
+if(plrY == -10){
+plrY = height-10
+}
+
+//color of backround
+ctx.fillStyle = "Blue"
+ctx.fillRect(0,0,width,height)
+//color of player
+ctx.fillStyle = "red"
+ctx.fillRect(plrX,plrY,10,10)
+//color of enemy
+ctx.fillStyle = "lightblue"
+ctx.fillRect(enmX,enmY,10,10)
+if(enmX==plrX && plrY==enmY){
+	if(highscore<score){
+	alert("GAME OVER!!! SCORE: " + parseFloat(score) + " NEW HIGH SCORE!!")
+    highscore = score
+    }else{
+    	alert("GAME OVER!!! SCORE: " + parseFLoat(score) + " HIGH SCORE: "+ parseFloat(highscore))
+    }
+    time = 0
+    enmX=0
+    enmY=0
+    plrX=390
+    plrY=390
+    pause = true
+}
+},1000/60)
+function doStuff(){
+  if (!document.fullscreenElement) {
+      canvas.requestFullscreen();
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen(); 
+    }
+  }
+}
+document.onkeyup = function(){
+dir = 0
+}
+document.onkeydown = function(e){
+	e=e||window.event
+    if(e.keyCode == 87){
+    	//plrY -=10
+        dir = 1
+    }
+    if(e.keyCode == 83){
+    	//plrY +=10
+        dir = 2
+    }
+    if(e.keyCode == 65){
+    	//plrX -=10
+        dir = 3
+    }
+    if(e.keyCode == 68){
+    	//plrX +=10
+        dir = 4
+    }
+    if(e.keyCode == 38){
+    	//plrY -=10
+        dir = 1
+    }
+    if(e.keyCode == 40){
+    	//plrY +=10
+        dir=2
+    }
+    if(e.keyCode == 37){
+    	//plrX -=10
+        dir=3
+    }
+    if(e.keyCode == 39){
+    	//plrX +=10
+        dir=4
+    }
+    if(e.keyCode == 80){
+    	if(pause == false){
+        	pause = true
+        }else{
+        	pause=false
+        }
+    }
+    if(e.keyCode == 70){
+      alert("U SUCK U NO GOOD PIECE OF BULL CRAP")
+    }
+}
+</script>
+</body>
+</html>
